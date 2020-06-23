@@ -1,0 +1,7 @@
+9:9
+mode:AA:
+porte-avion:5:
+fregate:4:
+patrouilleur:3:
+remorqueur:1:
+remorqueur:1:

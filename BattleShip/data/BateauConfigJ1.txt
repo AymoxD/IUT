@@ -1,0 +1,6 @@
+porte-avion:0:0:HORIZONTAL
+fregate:0:2:HORIZONTAL
+frefate:0:4:HORIZONTAL
+patrouilleur:0:6:HORIZONTAL
+sous-marin:0:8:HORIZONTAL
+remorqueur:8:9:HORIZONTAL
