@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<project name="Zen l'initié" default="compile" basedir=".">
+ 	<target name="clean" description="nettoie la javadoc, le build et les rapports">
+ 		<delete dir="build/jar"/>
+ 		<delete dir="build/classes/jeu"/>
+ 		<delete dir="build/classes/test"/>
+ 		<delete dir="build/classes/utilitaire"/>
+ 		<delete dir="doc"/>
+ 		<delete dir="rapportJunit"/>
+ 	</target>
+	<target name="doc" description="Génère la javadoc">
+		<javadoc sourcepath="src" destdir="doc"/>
+	</target>
+	<target name="JUnitTest" description="lance les test JUnit">
+		<javac includeantruntime="false" srcdir="src/test" destdir="build/classes" classpath="build/classes"/>
+		<mkdir dir="rapportJunit"/>
+			 <junit fork="yes" printsummary="no" haltonfailure="no">
+			 	<batchtest fork="yes" todir="./rapportJunit" >
+			 	      <fileset dir="build/classes">
+			 	        <include name="**/*Test.class" />
+			 	      </fileset>
+			 	    </batchtest>
+			 	    <formatter type="xml" />
+			 	
+	            	<classpath>
+	            		<pathelement location="antJUnit/junit-4.12.jar"/>
+	            		<pathelement location="build/classes"/>
+	            	</classpath>
+	            </junit>
+				<junitreport todir="./rapportJunit">
+		    			<fileset dir="./rapportJunit">
+		       			 	<include name="TEST-*.xml"/>
+		   				 </fileset>
+		    		<report format="frames" todir="./rapportJunit"/>
+				</junitreport>
+		</target>
+ 	<target name="compile" description="compile les classe du jeu">
+	 	<mkdir dir="build/classes"/>
+ 		<javac includeantruntime="false" srcdir="src" destdir="build/classes"/>
+ 	</target>
+ 	<target name="jar" description="crée le jar du jeu">
+ 		<mkdir dir="build/jar"/>
+ 		<jar destfile="build/jar/ZenLinitie.jar" basedir="build/classes">
+ 			<manifest>
+ 			 		<attribute name="Main-Class" value="Lanceur"/>
+ 			 </manifest>
+ 		</jar>
+ 	</target>
+
+ 	<target name="run" description="Lance le jeu">
+ 		<java jar="build/jar/ZenLinitie.jar" fork="true"/>
+ 	</target>
+</project>
